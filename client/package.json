@@ -17,7 +17,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@xyflow/react": "^12.0.4",
     "aos": "^2.3.4",
-    "axios": "^1.7.3",
+    "axios": "^1.7.4",
     "circleci-visual-builder": "file:",
     "html-to-image": "^1.11.11",
     "js-yaml": "^4.1.0",
