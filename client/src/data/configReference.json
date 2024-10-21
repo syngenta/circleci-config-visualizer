@@ -1,0 +1,1093 @@
+{
+  "version": {
+    "required": false,
+    "type": "string",
+    "description": "The version field is intended to be used in order to issue warnings for deprecation or breaking changes.",
+    "availableForVisualization": false
+  },
+  "orbs": {
+    "required": false,
+    "type": "map",
+    "description": "The orbs key is a map describing orbs and their versions. Keys are orb names, values are orb versions.",
+    "availableForVisualization": true
+  },
+  "commands": {
+    "required": false,
+    "type": "map",
+    "description": "The commands key allows you to define a reusable set of steps as a single key.",
+    "subKeys": {
+      "steps": {
+        "required": true,
+        "type": "sequence",
+        "description": "Sequence of steps."
+      },
+      "parameters": {
+        "required": false,
+        "type": "map",
+        "description": "Map of parameter keys to values."
+      }
+    },
+    "availableForVisualization": true
+  },
+  "jobs": {
+    "required": true,
+    "type": "map",
+    "description": "The jobs key is where you define the build, test, and deployment jobs that comprise your config.",
+    "subKeys": {
+      "docker": {
+        "required": false,
+        "type": "list",
+        "description": "List of maps, each defining an image.",
+        "subKeys": {
+          "image": {
+            "required": true,
+            "type": "string",
+            "description": "The Docker image to use."
+          },
+          "name": {
+            "required": false,
+            "type": "string",
+            "description": "The name to use for the image."
+          },
+          "entrypoint": {
+            "required": false,
+            "type": ["string", "list"],
+            "description": "The entrypoint for the image."
+          },
+          "user": {
+            "required": false,
+            "type": "string",
+            "description": "The user to use for the image."
+          },
+          "auth": {
+            "required": false,
+            "type": "map",
+            "description": "Authentication credentials for the image.",
+            "subKeys": {
+              "username": {
+                "required": true,
+                "type": "string",
+                "description": "The username for authentication."
+              },
+              "password": {
+                "required": true,
+                "type": "string",
+                "description": "The password for authentication."
+              }
+            }
+          },
+          "aws_auth": {
+            "required": false,
+            "type": "map",
+            "description": "AWS authentication credentials for the image.",
+            "subKeys": {
+              "aws_access_key_id": {
+                "required": true,
+                "type": "string",
+                "description": "The AWS access key ID."
+              },
+              "aws_secret_access_key": {
+                "required": true,
+                "type": "string",
+                "description": "The AWS secret access key."
+              }
+            }
+          },
+          "environment": {
+            "required": false,
+            "type": "map",
+            "description": "Environment variables for the image."
+          }
+        }
+      },
+      "machine": {
+        "required": false,
+        "type": "map",
+        "description": "Configuration for a virtual machine image.",
+        "subKeys": {
+          "image": {
+            "required": true,
+            "type": "string",
+            "description": "The virtual machine image to use."
+          },
+          "docker_layer_caching": {
+            "required": false,
+            "type": "boolean",
+            "description": "Whether to enable Docker layer caching."
+          }
+        }
+      },
+      "steps": {
+        "required": true,
+        "type": "sequence",
+        "description": "Sequence of steps to run in the job."
+      },
+      "parallelism": {
+        "required": false,
+        "type": "integer",
+        "description": "The number of instances of the job to run in parallel."
+      },
+      "resource_class": {
+        "required": false,
+        "type": "string",
+        "description": "The resource class to use for the job."
+      },
+      "working_directory": {
+        "required": false,
+        "type": "string",
+        "description": "The working directory for the job."
+      },
+      "shell": {
+        "required": false,
+        "type": "string",
+        "description": "The shell to use for all commands in the job."
+      },
+      "environment": {
+        "required": false,
+        "type": "map",
+        "description": "Environment variables for the job."
+      },
+      "enable_services": {
+        "required": false,
+        "type": "list",
+        "description": "List of services to enable for the job."
+      },
+      "context": {
+        "required": false,
+        "type": "list",
+        "description": "List of contexts to share environment variables across jobs."
+      },
+      "checkout": {
+        "required": false,
+        "type": "map",
+        "description": "Configuration for checking out source code.",
+        "subKeys": {
+          "path": {
+            "required": false,
+            "type": "string",
+            "description": "The path to check out the code."
+          }
+        }
+      },
+      "persist_to_workspace": {
+        "required": false,
+        "type": "map",
+        "description": "Configuration for persisting data for downstream jobs.",
+        "subKeys": {
+          "root": {
+            "required": true,
+            "type": "string",
+            "description": "The root directory to persist."
+          },
+          "paths": {
+            "required": true,
+            "type": "list",
+            "description": "List of paths to persist."
+          }
+        }
+      },
+      "attach_workspace": {
+        "required": false,
+        "type": "map",
+        "description": "Configuration for attaching a persisted workspace.",
+        "subKeys": {
+          "at": {
+            "required": true,
+            "type": "string",
+            "description": "The path to attach the workspace."
+          }
+        }
+      },
+      "post": {
+        "required": false,
+        "type": "sequence",
+        "description": "Sequence of steps to run after the job."
+      }
+    },
+    "availableForVisualization": true
+  },
+  "workflows": {
+    "required": true,
+    "type": "map",
+    "description": "With workflows, you can schedule jobs and hold jobs for manual approval.",
+    "subKeys": {
+      "jobs": {
+        "required": false,
+        "type": "map",
+        "description": "Map of job names to filters.",
+        "subKeys": {
+          "filters": {
+            "required": false,
+            "type": "map",
+            "description": "Filters for when the job should run.",
+            "subKeys": {
+              "branches": {
+                "required": false,
+                "type": "map",
+                "description": "Branch filters.",
+                "subKeys": {
+                  "only": {
+                    "required": false,
+                    "type": "list",
+                    "description": "List of branches to include."
+                  },
+                  "ignore": {
+                    "required": false,
+                    "type": "list",
+                    "description": "List of branches to ignore."
+                  }
+                }
+              },
+              "tags": {
+                "required": false,
+                "type": "map",
+                "description": "Tag filters.",
+                "subKeys": {
+                  "only": {
+                    "required": false,
+                    "type": "list",
+                    "description": "List of tags to include."
+                  },
+                  "ignore": {
+                    "required": false,
+                    "type": "list",
+                    "description": "List of tags to ignore."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "requires": {
+        "required": false,
+        "type": "list",
+        "description": "List of job names that must complete before this workflow can run."
+      },
+      "context": {
+        "required": false,
+        "type": "list",
+        "description": "List of contexts to share environment variables across jobs."
+      },
+      "filters": {
+        "required": false,
+        "type": "map",
+        "description": "Filters for when the workflow should run.",
+        "subKeys": {
+          "branches": {
+            "required": false,
+            "type": "map",
+            "description": "Branch filters.",
+            "subKeys": {
+              "only": {
+                "required": false,
+                "type": "list",
+                "description": "List of branches to include."
+              },
+              "ignore": {
+                "required": false,
+                "type": "list",
+                "description": "List of branches to ignore."
+              }
+            }
+          },
+          "tags": {
+            "required": false,
+            "type": "map",
+            "description": "Tag filters.",
+            "subKeys": {
+              "only": {
+                "required": false,
+                "type": "list",
+                "description": "List of tags to include."
+              },
+              "ignore": {
+                "required": false,
+                "type": "list",
+                "description": "List of tags to ignore."
+              }
+            }
+          }
+        }
+      }
+    },
+    "availableForVisualization": true
+  },
+  "executors": {
+    "required": false,
+    "type": "map",
+    "description": "Executors define the environment in which the steps of a job will be run.",
+    "subKeys": {
+      "docker": {
+        "required": false,
+        "type": "list",
+        "description": "List of maps, each defining an image.",
+        "subKeys": {
+          "image": {
+            "required": true,
+            "type": "string",
+            "description": "The Docker image to use."
+          },
+          "name": {
+            "required": false,
+            "type": "string",
+            "description": "The name to use for the image."
+          },
+          "entrypoint": {
+            "required": false,
+            "type": ["string", "list"],
+            "description": "The entrypoint for the image."
+          },
+          "user": {
+            "required": false,
+            "type": "string",
+            "description": "The user to use for the image."
+          },
+          "auth": {
+            "required": false,
+            "type": "map",
+            "description": "Authentication credentials for the image.",
+            "subKeys": {
+              "username": {
+                "required": true,
+                "type": "string",
+                "description": "The username for authentication."
+              },
+              "password": {
+                "required": true,
+                "type": "string",
+                "description": "The password for authentication."
+              }
+            }
+          },
+          "aws_auth": {
+            "required": false,
+            "type": "map",
+            "description": "AWS authentication credentials for the image.",
+            "subKeys": {
+              "aws_access_key_id": {
+                "required": true,
+                "type": "string",
+                "description": "The AWS access key ID."
+              },
+              "aws_secret_access_key": {
+                "required": true,
+                "type": "string",
+                "description": "The AWS secret access key."
+              }
+            }
+          },
+          "environment": {
+            "required": false,
+            "type": "map",
+            "description": "Environment variables for the image."
+          }
+        }
+      },
+      "machine": {
+        "required": false,
+        "type": "map",
+        "description": "Configuration for a virtual machine image.",
+        "subKeys": {
+          "image": {
+            "required": true,
+            "type": "string",
+            "description": "The virtual machine image to use."
+          },
+          "docker_layer_caching": {
+            "required": false,
+            "type": "boolean",
+            "description": "Whether to enable Docker layer caching."
+          }
+        }
+      },
+      "resource_class": {
+        "required": false,
+        "type": "string",
+        "description": "The resource class to use for the executor."
+      },
+      "working_directory": {
+        "required": false,
+        "type": "string",
+        "description": "The working directory for the executor."
+      }
+    },
+    "availableForVisualization": true
+  },
+  "setup_remote_docker": {
+    "required": false,
+    "type": "map",
+    "description": "The setup_remote_docker key allows you to opt-in to using the Docker Engine for remote Docker execution.",
+    "subKeys": {
+      "version": {
+        "required": true,
+        "type": "string",
+        "description": "The version of Docker to use."
+      },
+      "docker_layer_caching": {
+        "required": false,
+        "type": "boolean",
+        "description": "Whether to enable Docker layer caching."
+      }
+    },
+    "availableForVisualization": false
+  },
+  "machine": {
+    "required": false,
+    "type": "map",
+    "description": "The machine key allows you to configure virtual machine image for your job.",
+    "subKeys": {
+      "image": {
+        "required": true,
+        "type": "string",
+        "description": "The virtual machine image to use."
+      },
+      "docker_layer_caching": {
+        "required": false,
+        "type": "boolean",
+        "description": "Whether to enable Docker layer caching."
+      }
+    },
+    "availableForVisualization": false
+  },
+  "docker": {
+    "required": false,
+    "type": "list",
+    "description": "The docker key allows you to configure a Docker image for the job's execution environment.",
+    "subKeys": {
+      "image": {
+        "required": true,
+        "type": "string",
+        "description": "The Docker image to use."
+      },
+      "name": {
+        "required": false,
+        "type": "string",
+        "description": "The name to use for the image."
+      },
+      "entrypoint": {
+        "required": false,
+        "type": ["string", "list"],
+        "description": "The entrypoint for the image."
+      },
+      "user": {
+        "required": false,
+        "type": "string",
+        "description": "The user to use for the image."
+      },
+      "auth": {
+        "required": false,
+        "type": "map",
+        "description": "Authentication credentials for the image.",
+        "subKeys": {
+          "username": {
+            "required": true,
+            "type": "string",
+            "description": "The username for authentication."
+          },
+          "password": {
+            "required": true,
+            "type": "string",
+            "description": "The password for authentication."
+          }
+        }
+      },
+      "aws_auth": {
+        "required": false,
+        "type": "map",
+        "description": "AWS authentication credentials for the image.",
+        "subKeys": {
+          "aws_access_key_id": {
+            "required": true,
+            "type": "string",
+            "description": "The AWS access key ID."
+          },
+          "aws_secret_access_key": {
+            "required": true,
+            "type": "string",
+            "description": "The AWS secret access key."
+          }
+        }
+      },
+      "environment": {
+        "required": false,
+        "type": "map",
+        "description": "Environment variables for the image."
+      }
+    },
+    "availableForVisualization": true
+  },
+  "resource_class": {
+    "required": false,
+    "type": "string",
+    "description": "The resource_class key allows you to configure CPU and RAM resources for the job.",
+    "availableForVisualization": false
+  },
+  "parallelism": {
+    "required": false,
+    "type": "integer",
+    "description": "The parallelism key allows you to configure how many instances of a job should run in parallel.",
+    "availableForVisualization": false
+  },
+  "shell": {
+    "required": false,
+    "type": "string",
+    "description": "The shell key allows you to configure the shell to use for all commands in a job.",
+    "availableForVisualization": false
+  },
+  "steps": {
+    "required": true,
+    "type": "sequence",
+    "description": "The steps key defines a collection of single actions to run during a job.",
+    "subKeys": {
+      "run": {
+        "required": false,
+        "type": "map",
+        "description": "The run key allows you to run arbitrary commands.",
+        "subKeys": {
+          "name": {
+            "required": false,
+            "type": "string",
+            "description": "The name of the step."
+          },
+          "command": {
+            "required": true,
+            "type": "string",
+            "description": "The command to run."
+          },
+          "shell": {
+            "required": false,
+            "type": "string",
+            "description": "The shell to use for the command."
+          },
+          "environment": {
+            "required": false,
+            "type": "map",
+            "description": "Environment variables for the command."
+          },
+          "background": {
+            "required": false,
+            "type": "boolean",
+            "description": "Whether to run the command in the background."
+          },
+          "working_directory": {
+            "required": false,
+            "type": "string",
+            "description": "The working directory for the command."
+          },
+          "no_output_timeout": {
+            "required": false,
+            "type": "string",
+            "description": "The time after which the command is terminated if there is no output."
+          }
+        }
+      },
+      "checkout": {
+        "required": false,
+        "type": "map",
+        "description": "The checkout key allows you to check out source code.",
+        "subKeys": {
+          "path": {
+            "required": false,
+            "type": "string",
+            "description": "The path to check out the code."
+          }
+        }
+      },
+      "persist_to_workspace": {
+        "required": false,
+        "type": "map",
+        "description": "The persist_to_workspace key allows you to persist data for use in downstream jobs.",
+        "subKeys": {
+          "root": {
+            "required": true,
+            "type": "string",
+            "description": "The root directory to persist."
+          },
+          "paths": {
+            "required": true,
+            "type": "list",
+            "description": "List of paths to persist."
+          }
+        }
+      },
+      "attach_workspace": {
+        "required": false,
+        "type": "map",
+        "description": "The attach_workspace key allows you to attach a persisted workspace.",
+        "subKeys": {
+          "at": {
+            "required": true,
+            "type": "string",
+            "description": "The path to attach the workspace."
+          }
+        }
+      },
+      "store_artifacts": {
+        "required": false,
+        "type": "map",
+        "description": "The store_artifacts key allows you to upload artifacts for later viewing in the CircleCI web application.",
+        "subKeys": {
+          "path": {
+            "required": true,
+            "type": "string",
+            "description": "The path to the artifacts to store."
+          },
+          "destination": {
+            "required": false,
+            "type": "string",
+            "description": "The destination directory for the artifacts."
+          }
+        }
+      },
+      "store_test_results": {
+        "required": false,
+        "type": "map",
+        "description": "The store_test_results key allows you to upload test results for display in the Test Summary section.",
+        "subKeys": {
+          "path": {
+            "required": true,
+            "type": "string",
+            "description": "The path to the test results to store."
+          }
+        }
+      },
+      "add_ssh_keys": {
+        "required": false,
+        "type": "map",
+        "description": "The add_ssh_keys key allows you to add SSH keys from a project's settings to a container.",
+        "subKeys": {
+          "fingerprints": {
+            "required": true,
+            "type": "list",
+            "description": "List of fingerprints of the SSH keys to add."
+          }
+        }
+      },
+      "when": {
+        "required": false,
+        "type": "map",
+        "description": "The when key allows you to control when a step is run based on criteria.",
+        "subKeys": {
+          "condition": {
+            "required": true,
+            "type": "string",
+            "description": "The condition to evaluate."
+          },
+          "filters": {
+            "required": false,
+            "type": "map",
+            "description": "Filters for when the step should run.",
+            "subKeys": {
+              "branches": {
+                "required": false,
+                "type": "map",
+                "description": "Branch filters.",
+                "subKeys": {
+                  "only": {
+                    "required": false,
+                    "type": "list",
+                    "description": "List of branches to include."
+                  },
+                  "ignore": {
+                    "required": false,
+                    "type": "list",
+                    "description": "List of branches to ignore."
+                  }
+                }
+              },
+              "tags": {
+                "required": false,
+                "type": "map",
+                "description": "Tag filters.",
+                "subKeys": {
+                  "only": {
+                    "required": false,
+                    "type": "list",
+                    "description": "List of tags to include."
+                  },
+                  "ignore": {
+                    "required": false,
+                    "type": "list",
+                    "description": "List of tags to ignore."
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "unless": {
+        "required": false,
+        "type": "map",
+        "description": "The unless key allows you to control when a step is skipped based on criteria.",
+        "subKeys": {
+          "condition": {
+            "required": true,
+            "type": "string",
+            "description": "The condition to evaluate."
+          },
+          "filters": {
+            "required": false,
+            "type": "map",
+            "description": "Filters for when the step should be skipped.",
+            "subKeys": {
+              "branches": {
+                "required": false,
+                "type": "map",
+                "description": "Branch filters.",
+                "subKeys": {
+                  "only": {
+                    "required": false,
+                    "type": "list",
+                    "description": "List of branches to include."
+                  },
+                  "ignore": {
+                    "required": false,
+                    "type": "list",
+                    "description": "List of branches to ignore."
+                  }
+                }
+              },
+              "tags": {
+                "required": false,
+                "type": "map",
+                "description": "Tag filters.",
+                "subKeys": {
+                  "only": {
+                    "required": false,
+                    "type": "list",
+                    "description": "List of tags to include."
+                  },
+                  "ignore": {
+                    "required": false,
+                    "type": "list",
+                    "description": "List of tags to ignore."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "availableForVisualization": true
+  },
+  "filters": {
+    "required": false,
+    "type": "map",
+    "description": "The filters key allows you to control when a job is run based on criteria.",
+    "subKeys": {
+      "branches": {
+        "required": false,
+        "type": "map",
+        "description": "Branch filters.",
+        "subKeys": {
+          "only": {
+            "required": false,
+            "type": "list",
+            "description": "List of branches to include."
+          },
+          "ignore": {
+            "required": false,
+            "type": "list",
+            "description": "List of branches to ignore."
+          }
+        }
+      },
+      "tags": {
+        "required": false,
+        "type": "map",
+        "description": "Tag filters.",
+        "subKeys": {
+          "only": {
+            "required": false,
+            "type": "list",
+            "description": "List of tags to include."
+          },
+          "ignore": {
+            "required": false,
+            "type": "list",
+            "description": "List of tags to ignore."
+          }
+        }
+      }
+    },
+    "availableForVisualization": true
+  },
+  "requires": {
+    "required": false,
+    "type": "list",
+    "description": "The requires key allows you to define job dependencies.",
+    "availableForVisualization": false
+  },
+  "context": {
+    "required": false,
+    "type": "list",
+    "description": "The context key allows you to share environment variables across jobs.",
+    "availableForVisualization": true
+  },
+  "checkout": {
+    "required": false,
+    "type": "map",
+    "description": "The checkout key allows you to check out source code.",
+    "subKeys": {
+      "path": {
+        "required": false,
+        "type": "string",
+        "description": "The path to check out the code."
+      }
+    },
+    "availableForVisualization": false
+  },
+  "persist_to_workspace": {
+    "required": false,
+    "type": "map",
+    "description": "The persist_to_workspace key allows you to persist data for use in downstream jobs.",
+    "subKeys": {
+      "root": {
+        "required": true,
+        "type": "string",
+        "description": "The root directory to persist."
+      },
+      "paths": {
+        "required": true,
+        "type": "list",
+        "description": "List of paths to persist."
+      }
+    },
+    "availableForVisualization": false
+  },
+  "attach_workspace": {
+    "required": false,
+    "type": "map",
+    "description": "The attach_workspace key allows you to attach a persisted workspace.",
+    "subKeys": {
+      "at": {
+        "required": true,
+        "type": "string",
+        "description": "The path to attach the workspace."
+      }
+    },
+    "availableForVisualization": false
+  },
+  "store_artifacts": {
+    "required": false,
+    "type": "map",
+    "description": "The store_artifacts key allows you to upload artifacts for later viewing in the CircleCI web application.",
+    "subKeys": {
+      "path": {
+        "required": true,
+        "type": "string",
+        "description": "The path to the artifacts to store."
+      },
+      "destination": {
+        "required": false,
+        "type": "string",
+        "description": "The destination directory for the artifacts."
+      }
+    },
+    "availableForVisualization": false
+  },
+  "store_test_results": {
+    "required": false,
+    "type": "map",
+    "description": "The store_test_results key allows you to upload test results for display in the Test Summary section.",
+    "subKeys": {
+      "path": {
+        "required": true,
+        "type": "string",
+        "description": "The path to the test results to store."
+      }
+    },
+    "availableForVisualization": false
+  },
+  "add_ssh_keys": {
+    "required": false,
+    "type": "map",
+    "description": "The add_ssh_keys key allows you to add SSH keys from a project's settings to a container.",
+    "subKeys": {
+      "fingerprints": {
+        "required": true,
+        "type": "list",
+        "description": "List of fingerprints of the SSH keys to add."
+      }
+    },
+    "availableForVisualization": false
+  },
+  "run": {
+    "required": false,
+    "type": "map",
+    "description": "The run key allows you to run arbitrary commands.",
+    "subKeys": {
+      "name": {
+        "required": false,
+        "type": "string",
+        "description": "The name of the step."
+      },
+      "command": {
+        "required": true,
+        "type": "string",
+        "description": "The command to run."
+      },
+      "shell": {
+        "required": false,
+        "type": "string",
+        "description": "The shell to use for the command."
+      },
+      "environment": {
+        "required": false,
+        "type": "map",
+        "description": "Environment variables for the command."
+      },
+      "background": {
+        "required": false,
+        "type": "boolean",
+        "description": "Whether to run the command in the background."
+      },
+      "working_directory": {
+        "required": false,
+        "type": "string",
+        "description": "The working directory for the command."
+      },
+      "no_output_timeout": {
+        "required": false,
+        "type": "string",
+        "description": "The time after which the command is terminated if there is no output."
+      }
+    },
+    "availableForVisualization": false
+  },
+  "when": {
+    "required": false,
+    "type": "map",
+    "description": "The when key allows you to control when a step is run based on criteria.",
+    "subKeys": {
+      "condition": {
+        "required": true,
+        "type": "string",
+        "description": "The condition to evaluate."
+      },
+      "filters": {
+        "required": false,
+        "type": "map",
+        "description": "Filters for when the step should run.",
+        "subKeys": {
+          "branches": {
+            "required": false,
+            "type": "map",
+            "description": "Branch filters.",
+            "subKeys": {
+              "only": {
+                "required": false,
+                "type": "list",
+                "description": "List of branches to include."
+              },
+              "ignore": {
+                "required": false,
+                "type": "list",
+                "description": "List of branches to ignore."
+              }
+            }
+          },
+          "tags": {
+            "required": false,
+            "type": "map",
+            "description": "Tag filters.",
+            "subKeys": {
+              "only": {
+                "required": false,
+                "type": "list",
+                "description": "List of tags to include."
+              },
+              "ignore": {
+                "required": false,
+                "type": "list",
+                "description": "List of tags to ignore."
+              }
+            }
+          }
+        }
+      }
+    },
+    "availableForVisualization": false
+  },
+  "unless": {
+    "required": false,
+    "type": "map",
+    "description": "The unless key allows you to control when a step is skipped based on criteria.",
+    "subKeys": {
+      "condition": {
+        "required": true,
+        "type": "string",
+        "description": "The condition to evaluate."
+      },
+      "filters": {
+        "required": false,
+        "type": "map",
+        "description": "Filters for when the step should be skipped.",
+        "subKeys": {
+          "branches": {
+            "required": false,
+            "type": "map",
+            "description": "Branch filters.",
+            "subKeys": {
+              "only": {
+                "required": false,
+                "type": "list",
+                "description": "List of branches to include."
+              },
+              "ignore": {
+                "required": false,
+                "type": "list",
+                "description": "List of branches to ignore."
+              }
+            }
+          },
+          "tags": {
+            "required": false,
+            "type": "map",
+            "description": "Tag filters.",
+            "subKeys": {
+              "only": {
+                "required": false,
+                "type": "list",
+                "description": "List of tags to include."
+              },
+              "ignore": {
+                "required": false,
+                "type": "list",
+                "description": "List of tags to ignore."
+              }
+            }
+          }
+        }
+      }
+    },
+    "availableForVisualization": false
+  },
+  "no_output_timeout": {
+    "required": false,
+    "type": "string",
+    "description": "The no_output_timeout key allows you to configure the time after which a job is terminated if there is no output.",
+    "availableForVisualization": false
+  },
+  "working_directory": {
+    "required": false,
+    "type": "string",
+    "description": "The working_directory key allows you to specify the working directory for a job.",
+    "availableForVisualization": false
+  },
+  "environment": {
+    "required": false,
+    "type": "map",
+    "description": "The environment key allows you to set environment variables for a job.",
+    "availableForVisualization": true
+  },
+  "enable_services": {
+    "required": false,
+    "type": "list",
+    "description": "The enable_services key allows you to enable services for a job.",
+    "availableForVisualization": false
+  }
+}

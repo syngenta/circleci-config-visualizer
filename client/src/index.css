@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.scroll {
+  overflow-y: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+* {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  scroll-behavior: smooth;
+}
+
+.debug {
+  @apply border-2 border-red-500;
+}
+
+.expand-properties-pane {
+  width: 45%;
+  transition: 0.4s width ease-in-out;
+}
+
+.collapse-properties-pane {
+  width: 0%;
+  padding: 0;
+  transition: 0.4s width ease-in-out;
+}
+
+.expand-workflow-job {
+  height: 300px;
+  transition: 0.4s height ease-in-out;
+}
+
+.collapse-workflow-job {
+  height: 70px;
+  transition: 0.4s height ease-in-out;
+}
+
+.expand-vertically {
+  height: 100px;
+  transition: 0.4s height ease-in-out;
+}
+
+.collapse-vertically {
+  height: 40px;
+  transition: 0.4s height ease-in-out;
+}
+
+.react-switch-label {
+  transition: background-color 0.2s;
+}
+
+.react-switch-label .react-switch-button {
+  transition: 0.2s;
+}
+
+.react-switch-checkbox:checked + .react-switch-label .react-switch-button {
+  left: calc(100% - 2px);
+  transform: translateX(-90%);
+}
+
+.react-switch-label:active .react-switch-button {
+  width: 60px;
+}
