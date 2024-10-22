@@ -1,0 +1,19 @@
+{
+  "name": "circleci-config-visualizer",
+  "version": "0.1.0",
+  "description": "A tool to visualize CircleCI config files",
+  "main": "cli/build/index.js",
+  "bin": {
+    "circleci-config-visualizer": "./cli/build/index.js"
+  },
+  "scripts": {
+    "start": "cd cli && node build/index.js",
+    "dev": "cd cli && nodemon src/index.ts",
+    "build": "cd cli && tsc"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "circleci-config-visualizer": "file:"
+  }
+}
