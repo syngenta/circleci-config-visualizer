@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import Home from "./pages/Home/Home";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, HashRouter } from "react-router-dom";
 import ToolBar from "./components/ToolBar/ToolBar";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import VisualEditor from "./components/VisualEditor/VisualEditor";
@@ -34,40 +34,12 @@ function App() {
     }
   }, []);
 
-  // useEffect(() => {
-  //   function hideError(e) {
-  //     if (
-  //       e.message ===
-  //       "ResizeObserver loop completed with undelivered notifications."
-  //     ) {
-  //       const resizeObserverErrDiv = document.getElementById(
-  //         "webpack-dev-server-client-overlay-div"
-  //       );
-  //       const resizeObserverErr = document.getElementById(
-  //         "webpack-dev-server-client-overlay"
-  //       );
-  //       if (resizeObserverErr) {
-  //         resizeObserverErr.setAttribute("style", "display: none");
-  //       }
-  //       if (resizeObserverErrDiv) {
-  //         resizeObserverErrDiv.setAttribute("style", "display: none");
-  //       }
-  //     }
-  //   }
-
-  //   window.addEventListener("error", hideError);
-  //   return () => {
-  //     window.addEventListener("error", hideError);
-  //   };
-  // }, []);
-
   return (
     <div className="h-full w-full border-[0px] border-gray-300 absolute flex-col scroll">
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/development" element={<Development />} />
-          {/* <ConfirmDialog /> */}
           <Route
             path="/editor"
             element={
@@ -101,7 +73,7 @@ function App() {
             }
           />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }

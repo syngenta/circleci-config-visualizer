@@ -14,28 +14,11 @@ import IconOnlyButton from "../../components/Widgets/Buttons/IconOnlyButton";
 import SecondaryButton from "../../components/Widgets/Buttons/SecondaryButton";
 import { IoConstructOutline } from "react-icons/io5";
 import { useEffect } from "react";
-import { io } from "socket.io-client";
 
 export default function Home() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const darkMode = useSelector(getDarkMode);
-
-  useEffect((): any => {
-    const socket = io("http://localhost:3001");
-
-    socket.on("fileData", (data) => {
-      const yamlData = yaml.load(data);
-      localStorage.setItem(
-        "currentFile",
-        JSON.stringify(yamlData)
-      );
-      dispatch(setDataReducer(yamlData));
-      navigate("/editor");
-    });
-
-    return () => socket.disconnect();
-  }, []);
 
   return (
     <div className="flex flex-row justify-center items-center h-full dark:bg-gray-800 relative">
@@ -111,7 +94,6 @@ export default function Home() {
                   };
                   reader.readAsText(file);
                 }
-                // setFiles(e.target.files)
               }}
             />
             <label

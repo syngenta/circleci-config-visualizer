@@ -5,8 +5,6 @@ export default function checkIfJobExistsInWorkflow(
   workflow: any
 ): boolean {
   for (const job of workflow.jobs) {
-    console.log(job);
-    // console.log(typeof job);
     if (typeof job === "object") {
       if (objToArrayConverter(job)[0][0] === jobName) {
         return true;

@@ -2,6 +2,7 @@
   "name": "circleci-config-visualizer",
   "version": "0.1.0",
   "description": "A tool to visualize CircleCI config files",
+  "homepage": "https://syngenta.github.io/circleci-config-visualizer",
   "license": "MIT",
   "private": true,
   "dependencies": {
@@ -19,12 +20,10 @@
     "@types/react-router-dom": "^5.3.3",
     "@xyflow/react": "^12.0.4",
     "aos": "^2.3.4",
-    "axios": "^1.7.3",
     "html-to-image": "^1.11.11",
     "js-yaml": "^4.1.0",
     "monaco-themes": "^0.4.4",
     "react": "^18.3.1",
-    "react-awesome-shapes": "^0.1.12",
     "react-dom": "^18.3.1",
     "react-icons": "^5.2.1",
     "react-json-view": "^1.21.3",
@@ -35,7 +34,6 @@
     "react-scripts": "5.0.1",
     "react-select": "^5.8.0",
     "redux": "^5.0.1",
-    "socket.io-client": "^4.8.0",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },

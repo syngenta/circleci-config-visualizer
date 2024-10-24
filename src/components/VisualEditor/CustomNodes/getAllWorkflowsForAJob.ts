@@ -5,7 +5,6 @@ function getAllWorkflowsForAJob(workflows: any[], jobName: string) {
   workflows.forEach(workflow=>{
     const workflowName: string = workflow[0];
     const workflowData: any = workflow[1];
-    // console.log()
     const workflowJobs: any[] = workflowData?.jobs;
     workflowJobs?.forEach(workflowJob=>{
         const jobArray = objToArrayConverter(workflowJob)[0];

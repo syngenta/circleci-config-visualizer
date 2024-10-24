@@ -12,7 +12,6 @@ import {
   Background,
   BackgroundVariant,
   MarkerType,
-  // useReactFlow,
   getNodesBounds,
   getViewportForBounds,
   useNodesState,
@@ -284,7 +283,6 @@ export default function VisualEditor({
         workflowJobsArray?.map((wJob: any[]) => {
           const wJobArray =
             typeof wJob === "string" ? [wJob] : objToArrayConverter(wJob)[0];
-          // const wJobArray = objToArrayConverter(wJob)[0];
           const wJobName = wJobArray?.[0];
           if (
             activeEntity?.type === "workflow" &&
@@ -298,7 +296,6 @@ export default function VisualEditor({
                 source: wJobName,
                 target: workflowName,
                 animated: true,
-                // label: `${wJobArray[0]} (Job) ---> ${workflow[0]} (Workflow)`,
                 style: { stroke: "#0672cbff", strokeWidth: 1.5 },
                 markerEnd: {
                   type: MarkerType.ArrowClosed,
@@ -308,7 +305,6 @@ export default function VisualEditor({
                 },
               },
             ]);
-            // }
           } else if (
             activeEntity?.type === "job" &&
             activeEntity?.entity[0] === wJobName &&
@@ -321,7 +317,6 @@ export default function VisualEditor({
                 source: wJobName,
                 target: workflowName,
                 animated: true,
-                // label: `${wJobArray[0]} (Job) ---> ${workflow[0]} (Workflow)`,
                 style: { stroke: "#0672cbff", strokeWidth: 1.5 },
                 markerEnd: {
                   type: MarkerType.ArrowClosed,
@@ -439,7 +434,6 @@ export default function VisualEditor({
       const workflowJobs = activeEntity.entity[1].jobs.map((job) => {
         const jobArray =
           typeof job === "string" ? [job] : objToArrayConverter(job)[0];
-        // const jobArray = objToArrayConverter(job)[0];
         return jobArray[0];
       });
       dispatch(setJobsVisible(workflowJobs));
@@ -489,7 +483,6 @@ export default function VisualEditor({
         nodes={nodes}
         colorMode={darkMode ? "dark" : "light"}
         defaultViewport={{ x: 100, y: 100, zoom: 0.6 }}
-        //   snapToGrid={true}
         elevateEdgesOnSelect={true}
         elementsSelectable={true}
         zoomOnDoubleClick={true}
@@ -519,7 +512,6 @@ export default function VisualEditor({
         defaultMarkerColor="red"
         nodeTypes={nodeTypes}
         edges={edges}
-        //   edgeTypes={edgeTypes}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
@@ -528,7 +520,6 @@ export default function VisualEditor({
         fitViewOptions={{
           padding: 0.2,
         }}
-        // defaultEdgeOptions={{ animated: true }}
       >
         <Background variant={BackgroundVariant.Dots} className="bg-gray-800" />
         {!takingScreenshot && <MiniMap pannable zoomable={false} />}
