@@ -1,32 +1,33 @@
-name: Publish to npm
+name: Deploy React App to GitHub Pages
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
 
 jobs:
-  publish:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          registry-url: "https://registry.npmjs.org"
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
 
-      - name: Install dependencies in client
-        run: cd client && npm install --force
+    - name: Install dependencies
+      run: npm install --force
 
-      - name: Install dependencies in cli
-        run: cd cli && npm install --force
+    - name: Build app
+      run: npm run build
+      env:
+        CI: false
 
-      - name: Build cli
-        run: cd cli && npm run build
-
-      - name: Publish to npm
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.SYNGENTA_NPM_TOKEN }}
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./build
