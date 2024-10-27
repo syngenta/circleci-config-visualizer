@@ -1,4 +1,4 @@
-<center>
+<div align="center">
 
 <img src="./images/logo.png" height="300" width="300"></img>
 
@@ -6,7 +6,7 @@
 [![Stars](https://custom-icon-badges.herokuapp.com/github/stars/syngenta/circleci-config-visualizer?logo=star&style=social&logoColor=black)](https://custom-icon-badges.herokuapp.com/github/stars/syngenta/circleci-config-visualizer?logo=star&style=social&logoColor=black)
 
 # CircleCI Config Visualizer
-</center>
+</div>
 
 <br />
 
@@ -20,13 +20,9 @@ Built using `Reactjs`, `Redux`, and `Typescript`.
 ## How to use 📝
 1. Go to **https://syngenta.github.io/circleci-config-visualizer** :
 
-<br />
-
 2. Click on **Upload** button and choose your config file to visualize:
 
     ![Homepage](https://github.com/syngenta/circleci-config-visualizer/blob/main/images/homepage.png)
-
-<br />
 
 3. The file gets opened in a visual editor:
 
@@ -56,8 +52,6 @@ my-app/
 ├─ README.md
 ├─ ...
 ```
-
-<br />
 
 ### The `src` directory:
  1. `components` - Contains all react components. Contains a `Widgets` folder where all reusable widgets like toggle switches, inputs, buttons, etc. are kept.
