@@ -1,55 +1,79 @@
+<center>
+
+<img src="./images/logo.png" height="300" width="300"></img>
+
+[![Deploy app to GitHub Pages](https://github.com/syngenta/circleci-config-visualizer/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/syngenta/circleci-config-visualizer/actions/workflows/deploy.yml)
+[![Stars](https://custom-icon-badges.herokuapp.com/github/stars/syngenta/circleci-config-visualizer?logo=star&style=social&logoColor=black)](https://custom-icon-badges.herokuapp.com/github/stars/syngenta/circleci-config-visualizer?logo=star&style=social&logoColor=black)
+
 # CircleCI Config Visualizer
-
-The `circleci-config-visualizer` is a package/tool that can be used to visualize circlei `config.yml` files. It provides a clear overview of CI workflows and jobs in the config files.
-
-A `cli` utility is also provided to help users visualize config files directly using command line by specifying the config file.
-
-Built using `reactjs`, `redux`, `nodejs` and `Typescript`.
-
-## How to use
-### Using CLI (For usage):
-1. Make sure you have `nodejs` and `npm` installed. Install the package using `npm`:
-
-    ```
-    npm install -g circleci-config-visualizer
-    ```
+</center>
 
 <br />
 
-2. Open terminal or command line and enter the following command to start the server and client:
+The `circleci-config-visualizer` is a webapp that can be used to visualize circlei `config.yml` files. It provides a clear overview of CI workflows and jobs in the config files.
 
-    ```
-    circleci-config-visualizer -f <path_to_your_config_file>
-    # eg - circleci-config-visualizer -f ./config.yml
-    ```
+
+Built using `Reactjs`, `Redux`, and `Typescript`.
 
 <br />
 
-3. The specified file gets opened in the browser at `localhost:3000` for visualization:
+## How to use 📝
+1. Go to **https://syngenta.github.io/circleci-config-visualizer** :
+
+<br />
+
+2. Click on **Upload** button and choose your config file to visualize:
+
+    ![Homepage](https://github.com/syngenta/circleci-config-visualizer/blob/main/images/homepage.png)
+
+<br />
+
+3. The file gets opened in a visual editor:
 
     ![Visualized file](https://github.com/syngenta/circleci-config-visualizer/blob/main/images/visualized_file.png)
 
 <br />
+
+## Folder structure 📁
+```
+my-app/
+├─ node_modules/
+├─ public/
+├─ src/
+│  ├─ components/
+|  |  ├─ ...
+|  |  ├─ Widgets/
+│  ├─ data/
+│  ├─ pages/
+│  ├─ redux/
+│  ├─ utils/
+│  ├─ index.css
+│  ├─ index.tsx
+│  ├─ App.tsx
+│  ├─ App.css
+├─ .gitignore
+├─ package.json
+├─ README.md
+├─ ...
+```
+
 <br />
 
-### Using React (For development):
-1. Clone the repo:
-
-    ```
-    git clone https://github.com/syngenta/circleci-config-visualizer.git
-    ```
-
-<br />
-
-2. Navigate to `client` directory and run `npm start` in the terminal:
-
-    ```
-    cd client
-    npm start
-    ```
+### The `src` directory:
+ 1. `components` - Contains all react components. Contains a `Widgets` folder where all reusable widgets like toggle switches, inputs, buttons, etc. are kept.
+ 2. `data` - Contains all files that serve static data in the application.
+ 3. `pages` - Contains actual pages that compose of components and are used in react router navigation.
+ 4. `redux` - Contains all the files related to redux, store, slices, reducers, etc.
+ 5. `utils` - Contains reusable utility functions which are frequently used anywhere and serve a specific purpose.
 
 <br />
 
-3. The webapp gets opened in the browser at `localhost:3000`. Click on **Upload** button and choose your config file to visualize:
+## Contributing 📌
+**Pushing directly to main branch isn't allowed.** Before contributing, make sure you are creating a new branch and making changes there. The branch name should be in this format:
+**`Feature/Bug_fix-Title_of_the_feature_or_bug_fix`**
 
-    ![Homepage](https://github.com/syngenta/circleci-config-visualizer/blob/main/images/homepage.png)
+For example: `Feature-Added_Custom_Nodes`, `Bug_fix-Fixed_Workflow_Node_content_overflow`. These are some valid branching names which would help us understand your contributions better.
+
+Also, add meaningful descriptions in your PRs to get a clear idea about the changes you are making.
+
+**Your Ideas are always welcomed!** 💡
