@@ -70,9 +70,9 @@ export default function CodeEditor() {
     });
   };
 
-  function handleEditorChange(value: any, event: any) {
-    console.log("here is the current model value:", value);
-  }
+  // function handleEditorChange(value: any, event: any) {
+  //   console.log("here is the current model value:", value);
+  // }
 
   return (
     <div className="overflow-scroll scroll h-full relative">
@@ -80,7 +80,7 @@ export default function CodeEditor() {
         className="h-full"
         defaultLanguage={"yaml"}
         value={generateCode() as string}
-        onChange={handleEditorChange}
+        // onChange={handleEditorChange}
         theme={darkMode ? "vs-dark" : "light"}
       />
     </div>

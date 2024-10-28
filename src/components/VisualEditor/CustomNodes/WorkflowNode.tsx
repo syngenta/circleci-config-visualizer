@@ -98,7 +98,6 @@ export default function WorkflowNode({
         </p>
         <div className="flex flex-col gap-2 h-fit max-h-[300px] scroll mt-4">
           {workflowData?.jobs?.map((job: any, key: number) => {
-            console.log(job);
             var jobArray, jobName, jobData;
             if (typeof job === "object") {
               jobArray = objToArrayConverter(job);

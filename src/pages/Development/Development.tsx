@@ -12,7 +12,7 @@ export default function Development() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const darkMode = useSelector(getDarkMode);
-  console.log(objToArrayConverter(configReference));
+
   return (
     <div className="flex flex-row justify-center items-center h-full dark:bg-gray-800 relative">
       <div className="absolute top-6 w-[90%] flex flex-row justify-between items-center gap-6">

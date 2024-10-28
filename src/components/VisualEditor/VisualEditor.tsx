@@ -66,9 +66,9 @@ const nodeTypes: NodeTypes = {
   command: CommandNode,
 };
 
-const onNodeDrag: OnNodeDrag = (_, node) => {
-  console.log("drag event", node.data);
-};
+// const onNodeDrag: OnNodeDrag = (_, node) => {
+//   console.log("drag event", node.data);
+// };
 
 type VisualEditorProps = {
   takingScreenshot: boolean;
@@ -275,11 +275,9 @@ export default function VisualEditor({
 
     if (jobs.length && workflows.length) {
       workflows.map((workflow) => {
-        console.log(workflow);
         const workflowName = workflow[0];
         const workflowData = workflow[1];
         const workflowJobsArray = workflow[1].jobs;
-        console.log(workflowJobsArray);
         workflowJobsArray?.map((wJob: any[]) => {
           const wJobArray =
             typeof wJob === "string" ? [wJob] : objToArrayConverter(wJob)[0];
@@ -515,7 +513,7 @@ export default function VisualEditor({
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        onNodeDrag={onNodeDrag}
+        // onNodeDrag={onNodeDrag}
         fitView
         fitViewOptions={{
           padding: 0.2,
