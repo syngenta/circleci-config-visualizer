@@ -18,7 +18,7 @@ Built using `Reactjs`, `Redux`, and `Typescript`.
 <br />
 
 ## How to use 📝
-1. Go to **https://syngenta.github.io/circleci-config-visualizer** :
+1. Go to **https://syngenta.github.io/circleci-config-visualizer**
 
 2. Click on **Upload** button and choose your config file to visualize:
 
@@ -63,11 +63,9 @@ my-app/
 <br />
 
 ## Contributing 📌
-**Pushing directly to main branch isn't allowed.** Before contributing, make sure you are creating a new branch and making changes there. The branch name should be in this format:
-**`Feature/Bug_fix-Title_of_the_feature_or_bug_fix`**
+See **[CONTRIBUTING.md](./CONTRIBUTING.md)** file for understanding how to contribute.
 
-For example: `Feature-Added_Custom_Nodes`, `Bug_fix-Fixed_Workflow_Node_content_overflow`. These are some valid branching names which would help us understand your contributions better.
+<br />
 
-Also, add meaningful descriptions in your PRs to get a clear idea about the changes you are making.
-
-**Your Ideas are always welcomed!** 💡
+## License 🔐
+This project is licensed under the MIT License. See the **[LICENSE](./LICENSE)** file for more details.
