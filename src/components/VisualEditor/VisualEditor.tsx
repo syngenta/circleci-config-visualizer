@@ -1,13 +1,11 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import "@xyflow/react/dist/style.css";
 import {
   ReactFlow,
   MiniMap,
-  Controls,
   addEdge,
   type Node,
   type OnConnect,
-  type OnNodeDrag,
   type NodeTypes,
   Background,
   BackgroundVariant,
@@ -54,6 +52,12 @@ import {
   setExecutorsVisible,
   setJobsVisible,
 } from "../../redux/visibleEntities/visibleEntitiesSlice";
+import { TbFocusAuto } from "react-icons/tb";
+import IconOnlyButton from "../Widgets/Buttons/IconOnlyButton";
+import { AiOutlineFullscreen, AiOutlineFullscreenExit } from "react-icons/ai";
+import { RiZoomInLine, RiZoomOutLine } from "react-icons/ri";
+import { MdOutlineLock, MdOutlineLockOpen } from "react-icons/md";
+import { MdOutlineFitScreen } from "react-icons/md";
 
 const imageWidth = 3000;
 const imageHeight = 3000;
@@ -94,10 +98,19 @@ export default function VisualEditor({
     type: string | undefined;
     entity: Node | any;
   } | null>(null);
+  const [options, setOptions] = useState<
+    | {
+        autoFocus: boolean;
+        fullscreen: boolean;
+        nodesDraggable: boolean;
+      }
+    | any
+  >({ autoFocus: true, fullscreen: false, nodesDraggable: true });
   const selectedEntity = useSelector(getSelectedEntity);
   const activeEntity = useSelector(getActiveEntity);
   const dispatch = useDispatch();
   const reactFlow = useReactFlow();
+  const canvaRef = useRef(null);
 
   const data = useSelector(getData);
 
@@ -193,11 +206,10 @@ export default function VisualEditor({
           });
           workflowJobs.map((job: any) => {
             var jobName, jobData;
-            if(typeof job === "object"){
+            if (typeof job === "object") {
               jobName = job[0];
               jobData = job[1];
-            }
-            else{
+            } else {
               jobName = job;
               jobData = job;
             }
@@ -440,7 +452,7 @@ export default function VisualEditor({
       dispatch(setExecutorsVisible(executor));
     }
     setTimeout(() => {
-      reactFlow.fitView({ duration: 400 });
+      options?.autoFocus && reactFlow.fitView({ duration: 400 });
     }, 500);
   }, [activeEntity]);
 
@@ -471,9 +483,10 @@ export default function VisualEditor({
 
   return (
     <div
-      className="canva w-full h-full"
+      className="canva w-full h-full flex flex-row bg-white"
       data-aos="fade"
       data-aos-duration={500}
+      ref={canvaRef}
     >
       <ReactFlow
         className="bg-gray-800"
@@ -513,6 +526,7 @@ export default function VisualEditor({
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        nodesDraggable={options.nodesDraggable}
         // onNodeDrag={onNodeDrag}
         fitView
         fitViewOptions={{
@@ -521,7 +535,73 @@ export default function VisualEditor({
       >
         <Background variant={BackgroundVariant.Dots} className="bg-gray-800" />
         {!takingScreenshot && <MiniMap pannable zoomable={false} />}
-        {!takingScreenshot && <Controls />}
+        {!takingScreenshot && (
+          <div className="border-[1px] dark:border-gray-700 border-gray-300 dark:bg-gray-800 bg-white w-fit h-12 absolute bottom-[2%] left-[50%] absolute-center rounded flex flex-row items-center justify-center gap-2 z-[5] px-2">
+            <IconOnlyButton
+              onClick={() => {
+                reactFlow.zoomIn();
+              }}
+              icon={<RiZoomInLine size={20} />}
+              className={`p-2 rounded hover:bg-gray-200`}
+            />
+            <IconOnlyButton
+              onClick={() => {
+                reactFlow.zoomOut();
+              }}
+              icon={<RiZoomOutLine size={20} />}
+              className={`p-2 rounded hover:bg-gray-200`}
+            />
+            <IconOnlyButton
+              onClick={() => {
+                reactFlow.fitView();
+              }}
+              icon={<MdOutlineFitScreen size={20} />}
+              className={`p-2 rounded hover:bg-gray-200`}
+            />
+            <IconOnlyButton
+              onClick={() => {
+                setOptions({
+                  ...options,
+                  nodesDraggable: !options?.nodesDraggable,
+                });
+              }}
+              icon={
+                options.nodesDraggable ? (
+                  <MdOutlineLockOpen size={20} />
+                ) : (
+                  <MdOutlineLock size={20} />
+                )
+              }
+              className={`p-2 rounded hover:bg-gray-200 ${
+                !options?.nodesDraggable ? "bg-blue-500" : ""
+              }`}
+            />
+            <IconOnlyButton
+              onClick={() => {
+                setOptions({ ...options, autoFocus: !options?.autoFocus });
+              }}
+              icon={<TbFocusAuto size={20} />}
+              className={`p-2 rounded hover:bg-gray-200 ${
+                options?.autoFocus ? "bg-blue-500" : ""
+              }`}
+            />
+            <IconOnlyButton
+              onClick={() => {
+                if (!document.fullscreenElement) {
+                  const canvaElement: any = canvaRef?.current;
+                  canvaElement.requestFullscreen();
+                } else {
+                  document.exitFullscreen();
+                }
+                setOptions({ ...options, fullscreen: !options?.fullscreen });
+              }}
+              icon={options.fullscreen?<AiOutlineFullscreenExit size={20} />:<AiOutlineFullscreen size={20} />}
+              className={`p-2 rounded hover:bg-gray-200 ${
+                options?.fullscreen ? "bg-blue-500" : ""
+              }`}
+            />
+          </div>
+        )}
       </ReactFlow>
     </div>
   );
