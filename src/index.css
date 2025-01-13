@@ -59,6 +59,19 @@
   transform: translate(-50%, 0%);
 }
 
+@keyframes rotate360 {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate {
+  animation: rotate360 1s linear infinite;
+}
+
 .react-switch-label {
   transition: background-color 0.2s;
 }

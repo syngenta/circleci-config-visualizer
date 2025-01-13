@@ -22,6 +22,7 @@ import IconOnlyButton from "../Widgets/Buttons/IconOnlyButton";
 import SecondaryButton from "../Widgets/Buttons/SecondaryButton";
 import { IoClose } from "react-icons/io5";
 import Loading from "../Widgets/Loading/Loading";
+import { HiOutlineRefresh } from "react-icons/hi";
 
 type GitHubProps = {
   viewGithubWindow: boolean;
@@ -49,7 +50,15 @@ export default function GitHub({
   const navigate = useNavigate();
 
   useEffect(() => {
-    githubData?.token && getAllRepos();
+    const cachedGithubRepos = localStorage.getItem("cachedGithubRepos");
+    if (githubData?.token) {
+      if (cachedGithubRepos) {
+        setRepos(JSON.parse(cachedGithubRepos));
+        setFilteredRepos(JSON.parse(cachedGithubRepos));
+      } else {
+        getAllRepos();
+      }
+    }
   }, [githubData?.token]);
 
   const getAllRepos = async () => {
@@ -67,6 +76,7 @@ export default function GitHub({
     setLoading(false);
     setRepos(data);
     setFilteredRepos(data);
+    localStorage.setItem("cachedGithubRepos", JSON.stringify(data));
   };
 
   const readRepoConfig = async (
@@ -128,8 +138,8 @@ export default function GitHub({
         icon: userData.data.avatar_url,
         email: userData.data.email,
       });
-      const encodedData = Buffer.from(data, "binary").toString("base64");
       dispatch(setGithubData(data));
+      const encodedData = Buffer.from(data, "binary").toString("base64");
       localStorage.setItem("githubData", encodedData);
     } catch (e: any) {
       if (e.message.includes("Bad credentials")) {
@@ -196,7 +206,10 @@ export default function GitHub({
               icon={<VscDebugDisconnect size={25} className={`text-red-500`} />}
               onClick={() => {
                 localStorage.removeItem("githubData");
+                localStorage.removeItem("cachedGithubRepos");
                 dispatch(setGithubData(null));
+                setRepos([]);
+                setFilteredRepos([]);
               }}
             />
           </div>
@@ -286,25 +299,28 @@ export default function GitHub({
               <p className="text-[20px] font-medium text-gray-700 dark:text-gray-300/80">
                 {`Found ${repos.length} repositories:`}
               </p>
-              <div className="w-full">
-                <InputBox
-                  type="text"
-                  className=""
-                  value={searchedRepo}
-                  onChange={(e) => {
-                    setSearchedRepo(e.target.value);
-                    setFilteredRepos(
-                      repos.filter(
-                        (repo: any) =>
-                          repo.name
-                            .toLowerCase()
-                            .indexOf(e.target.value.toLowerCase()) !== -1
-                      )
-                    );
-                  }}
-                  placeholder="Search repo name here..."
-                  disabled={false}
-                />
+              <div className="w-full flex flex-row justify-between items-center gap-4">
+                <div className="w-full">
+                  <InputBox
+                    type="text"
+                    className="w-full"
+                    value={searchedRepo}
+                    onChange={(e) => {
+                      setSearchedRepo(e.target.value);
+                      setFilteredRepos(
+                        repos.filter(
+                          (repo: any) =>
+                            repo.name
+                              .toLowerCase()
+                              .indexOf(e.target.value.toLowerCase()) !== -1
+                        )
+                      );
+                    }}
+                    placeholder="Search repo name here..."
+                    disabled={false}
+                  />
+                </div>
+                <IconOnlyButton className={`${loading?"rotate":""}`} icon={<HiOutlineRefresh size={20} />} onClick={()=>{setRepos([]);setFilteredRepos([]);getAllRepos();}} />
               </div>
               <div
                 className={`mt-4 ${
