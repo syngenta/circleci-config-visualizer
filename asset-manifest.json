@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/circleci-config-visualizer/static/css/main.7afe5a86.css",
-    "main.js": "/circleci-config-visualizer/static/js/main.d36d6cbf.js",
+    "main.css": "/circleci-config-visualizer/static/css/main.4f725dd6.css",
+    "main.js": "/circleci-config-visualizer/static/js/main.65dff62a.js",
     "index.html": "/circleci-config-visualizer/index.html",
-    "main.7afe5a86.css.map": "/circleci-config-visualizer/static/css/main.7afe5a86.css.map",
-    "main.d36d6cbf.js.map": "/circleci-config-visualizer/static/js/main.d36d6cbf.js.map"
+    "main.4f725dd6.css.map": "/circleci-config-visualizer/static/css/main.4f725dd6.css.map",
+    "main.65dff62a.js.map": "/circleci-config-visualizer/static/js/main.65dff62a.js.map"
   },
   "entrypoints": [
-    "static/css/main.7afe5a86.css",
-    "static/js/main.d36d6cbf.js"
+    "static/css/main.4f725dd6.css",
+    "static/js/main.65dff62a.js"
   ]
 }
