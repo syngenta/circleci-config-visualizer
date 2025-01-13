@@ -16,7 +16,7 @@ export default function IconOnlyButton({
   return (
     <button
       disabled={disabled}
-      className={`cursor-pointer hover:opacity-75 ${className}`}
+      className={`cursor-pointer hover:opacity-75 ${className} dark:text-white`}
       onClick={onClick}
     >
       {icon}

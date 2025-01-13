@@ -14,6 +14,8 @@ import "aos/dist/aos.css";
 import { setDataReducer } from "./redux/data/dataSlice";
 import Development from "./pages/Development/Development";
 import { ReactFlowProvider } from "@xyflow/react";
+import { setGithubData } from "./redux/githubData/githubDataSlice";
+import { Buffer } from "buffer";
 AOS.init();
 
 function App() {
@@ -31,6 +33,16 @@ function App() {
     } else {
       dispatch(setDarkMode(false));
       document.documentElement.classList.remove("dark");
+    }
+    const githubData = localStorage.getItem("githubData");
+    if (githubData) {
+      dispatch(
+        setGithubData(
+          Buffer.from(githubData, "base64").toString("binary")
+        )
+      );
+    } else {
+      dispatch(setGithubData(null));
     }
   }, []);
 

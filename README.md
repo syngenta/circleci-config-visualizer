@@ -3,7 +3,15 @@
 <img src="./images/logo.png" height="300" width="300"></img>
 
 [![Deploy app to GitHub Pages](https://github.com/syngenta/circleci-config-visualizer/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/syngenta/circleci-config-visualizer/actions/workflows/deploy.yml)
-[![Stars](https://custom-icon-badges.herokuapp.com/github/stars/syngenta/circleci-config-visualizer?logo=star&style=social&logoColor=black)](https://custom-icon-badges.herokuapp.com/github/stars/syngenta/circleci-config-visualizer?logo=star&style=social&logoColor=black)
+[![Stars](https://img.shields.io/github/stars/syngenta/circleci-config-visualizer)](https://img.shields.io/github/stars/syngenta/circleci-config-visualizer)
+
+[![MIT License](https://img.shields.io/github/license/syngenta/circleci-config-visualizer)](https://img.shields.io/github/license/syngenta/circleci-config-visualizer)
+[![GitHub Release](https://img.shields.io/github/v/release/syngenta/circleci-config-visualizer)](https://img.shields.io/github/v/release/syngenta/circleci-config-visualizer)
+[![Open Issues](https://img.shields.io/github/issues/syngenta/circleci-config-visualizer)](https://img.shields.io/github/issues/syngenta/circleci-config-visualizer)
+[![Pull Requests](https://img.shields.io/github/issues-pr/syngenta/circleci-config-visualizer)](https://img.shields.io/github/issues-pr/syngenta/circleci-config-visualizer)
+
+[![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
+
 
 # CircleCI Config Visualizer
 </div>
@@ -24,7 +32,15 @@ Built using `Reactjs`, `Redux`, and `Typescript`.
 
     ![Homepage](https://github.com/syngenta/circleci-config-visualizer/blob/main/images/homepage.png)
 
-3. The file gets opened in a visual editor:
+3. Alternatively, you can now connect your GitHub account using a Personal Access Token (PAT) and load config files directly from your repositories:
+
+    ![GitHub Connect](https://github.com/syngenta/circleci-config-visualizer/blob/main/images/github_connect.png)
+
+    If `config.yml` is present in the repo, the status will be shown. Click on **Load Config** button to load the config:
+
+    ![GitHub Config Load](https://github.com/syngenta/circleci-config-visualizer/blob/main/images/github_config_load.png)
+
+4. The file gets opened in a visual editor:
 
     ![Visualized file](https://github.com/syngenta/circleci-config-visualizer/blob/main/images/visualized_file.png)
 
